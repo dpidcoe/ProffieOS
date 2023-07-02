@@ -24,8 +24,8 @@ BatteryMonitor() : reader_(batteryLevelPin,
   float battery_percent() {
     // Energy is roughly proportional to voltage squared.
     float v = battery();
-    float min_v = 2.85;
-    float max_v = 4.1;
+    float min_v = 6.0;
+    float max_v = 8.4;
     return 100.0 * clamp((v * v - min_v * min_v) / (max_v * max_v - min_v * min_v), 0, 1);
 //    return 100.0 * (v - min_v) / (max_v - min_v);
   }
@@ -132,7 +132,9 @@ private:
     float pulldown = 33000;  // Internal pulldown is 33kOhm
     float pullup = BATTERY_PULLUP_OHMS;  // External pullup
 #endif
-    return volts * (1.0 + pullup / pulldown);
+    //return volts * (1.0 + pullup / pulldown);
+    //multipliers based on emperical measurements plotting slope/intercept
+    return volts * 3.2591 - 0.4783;
 #endif
   }
 

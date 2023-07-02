@@ -23,7 +23,7 @@ public:
       Color8(255,0,0),
       Color8(255,0,0) 
     };
-    float x = (4.0 - volts) * 2.0;
+    float x = (8.0 - volts) * 2.0;
     int i = floorf(x);
     i = clampi32(i, 0, NELEM(colors) - 2);
     // Blend colors over 0.1 volts.
@@ -33,8 +33,8 @@ public:
     c = c.mix(Color8(), black_mix);
     int num_leds = blade->num_leds();
 
-    float min_volts = 2.7;
-    float max_volts = 4.2;
+    float min_volts = 6;
+    float max_volts = 8.4;
     float pos = (volts - min_volts) * num_leds / (max_volts - min_volts);
     int p = pos * 32;
     for (int i = 0; i < num_leds; i++) {
